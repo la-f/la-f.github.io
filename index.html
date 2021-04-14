@@ -1,0 +1,264 @@
+@@ -0,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<link rel="stylesheet" href="3.0.css" />
+		<meta charset="utf-8" />
+		<title>3.0</title>
+
+
+
+
+		<script>
+			var href_list = ["https://www.bilibili.com", "https://www.zhihu.com", "https://weibo.com", "https://music.163.com/",
+				"https://www.doyoudo.com/", "https://www.zjlib.cn/", "https://pan.baidu.com/", "https://sports.qq.com/"
+			];
+			var href_name_list = ["bilibili", "知乎", "微博", "云音乐", "doyoudo", "浙图书馆", "百度网盘", "腾讯体育"]; //最多4个字！！！！！！！！！！
+			var music_id = ["479422898", "1366755870", "441491828"];
+			var music_name = ["🐟🐟🐟🐟🐟🐟", "*星星的轨迹*", "⭐水星记⭐"];
+		</script>
+		<style>
+			font {
+				font-family: YouYuan;
+			}
+		</style>
+
+		<script>
+			// 时间获取
+			window.onload = function() {
+				setInterval("NowTime()", 100); //每0.1秒刷新时间
+				setInterval("changeHref()"); //不知道怎么写
+				
+			}
+			
+			function tt(){
+				var i = document.getElementById("gridd");
+				document.getElementById("music_name").innerHTML=music_name[i==0?music_name.length-1:i-1];
+			}
+			
+			function NowTime(){
+			    var myDate=new Date();
+			    var y = myDate.getFullYear();
+			    var M = myDate.getMonth()+1;     //获取当前月份(0-11,0代表1月)
+			    var d = myDate.getDate();        //获取当前日(1-31)
+			    var h = myDate.getHours();       //获取当前小时数(0-23)
+			    var m = myDate.getMinutes();     //获取当前分钟数(0-59)
+			    var s = myDate.getSeconds();     //获取当前秒数(0-59)  
+				var D = myDate.getDay();
+				
+			    //检查是否小于10
+			    M=check(M);
+			    d=check(d);
+			    h=check(h);
+			    m=check(m);
+			    s=check(s);
+				D=checkD(D);
+			    var timestr = y+"-"+M+"-"+d+" "+h+":"+m+":"+s+" 周"+D;
+			    document.getElementById("nowtime").innerHTML=timestr;
+			}
+			//时间数字小于10，则在之前加个“0”补位。
+			function check(i){
+			    var num = (i<10)?("0"+i) : i;
+			    return num;
+			}
+			//判断周几
+			function checkD(D){
+				switch(D){
+					case 1:return "一";
+					case 2:return "二";
+					case 3:return "三";
+					case 4:return "四";
+					case 5:return "五";
+					case 6:return "六";
+					case 0:return "日";
+				}
+			}
+
+
+			function changeHref() {
+				for (var i = 0; i < href_list.length; i++) {
+					var a = document.getElementById(i);
+					a.setAttribute("href", href_list[i]);
+					a.innerHTML = href_name_list[i];
+				}
+
+			}
+
+			function tiaozhuan(i) {
+				window.open(href_list[i], "_blank");
+			}
+			// BGM暂停/播放
+			function bf(){			 
+				var audio = document.getElementById('music'); 		
+				if(audio.paused){
+					audio.play();
+					document.getElementById("music_name").innerHTML=music_name[i==0?music_name.length-1:i-1];
+				}else{
+					audio.pause();
+					document.getElementById("music_name").innerHTML="BGM";
+				}
+			}
+			// 上一首
+			function pre(){
+				var audio = document.getElementById('music');
+				audio.load();//更改audio.src值后，需要再次加载audio	
+				i = i-2;
+				if(i<0){
+					i = i+music_id.length;
+				}
+				document.getElementById("bgm").src=path1+music_id[i]+path2;
+				document.getElementById("music_name").innerHTML=music_name[i];
+				i = (i+1)%music_name.length;
+				audio.play();
+				
+			}
+			// 下一首
+			function next(){
+				var audio = document.getElementById('music'); 
+				audio.load();//更改audio.src值后，需要再次加载audio	
+				document.getElementById("bgm").src=path1+music_id[i]+path2;
+				document.getElementById("music_name").innerHTML=music_name[i];
+				i = (i+1)%music_name.length;					
+				audio.play();
+			}
+		</script>
+		
+		<!-- 百度小框框的样式 -->
+		
+
+
+	</head>
+
+	<body background="5.jpg" no-repeat left top>
+		
+	
+			
+			   <div class="grid">
+			
+			    </div><script>
+			           var arr = [];
+			           for (var i = 0; i < 20; i++) {
+			               arr.push('<div class="cell "></div>');
+			           }
+			           var grid = document.querySelector('.grid');
+			   
+			           grid.innerHTML = arr.join('');
+			       </script>
+			   
+			
+
+		<div class="bgm" align="right"; align="top" style="height:16px; position: absolute;top: 0;right: 5px;" >
+			<a  href="javascript:pre()">
+				<<</a> <a id="music_name" href="javascript:bf()"  ><text >BGM</text>
+			</a>
+			<a href="javascript:next()" >>></a>
+		</div>
+		
+		
+		
+		<!-- BGM -->
+		<div align="right">
+			<audio id="music" controls="controls" preload hidden="hidden" onended="next()">
+				<script>
+					var path1 = "http://music.163.com/song/media/outer/url?id=";
+					var path2 =".mp3"
+					var i = 1;
+					// var list = new ArrayList();
+					// list.add("1426070676");				
+				</script>
+				<source id="bgm">
+				<script>
+					document.getElementById("bgm").src=path1+music_id[0]+path2;								
+				</script>
+			</audio>
+			<!-- <span id="music_name" style="color: aqua; font-size: 7px;width: 1.9125rem;height: 0.0625rem;"></span> -->
+		
+			<!-- 通过按钮实现音量调节 -->
+			<!-- <button id="b" onclick="volume(1);">V+</button>
+			<button id="b" onclick="volume(0);">V-</button> -->
+			<!-- 调节音量 -->
+			<!-- <input id="volume" type="range" oninput="volume(value)" min="0.0" max="1.0" step="0.01" value="0.6"> -->
+		</div>
+
+
+
+		<table >
+			<tr>
+				<td colspan="4" ></td>
+			</tr>
+			<tr height="100px" >
+				<td colspan="4">
+					<h1 style="font-family: " YouYuan";">
+						<div align="center" style="color: darkorange;" id="nowtime">TIME</div>
+					</h1>
+				</td>
+			</tr>
+			<tr height="300px">
+				<td colspan="4" align="center"><div >
+					<form class = "form" style="border: #000000;" action="http://www.baidu.com/s" method="GET" target="_blank">
+						<input class="input" type="text" name="wd" class="input" size="28" />
+						<!-- <input type="submit" value="百度一下" /> -->
+					</form>
+				</div></td>
+			</tr>
+			<tr height="200px">
+				
+			</tr>
+			<tr>
+				<td>
+					<!-- <div class="div1">B -->
+					<div class="Bbox">
+						<a href="javascript:void(0)" onclick="tiaozhuan(0)"><text id="0"></text>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</a>
+					</div>
+				</td>
+				<td>
+					<div class="Bbox">
+						<a href="javascript:void(0)" onclick="tiaozhuan(1)"><text id="1"></text> <span></span><span></span><span></span><span></span></a>
+					</div>
+				</td>
+				<td>
+					<div class="Bbox">
+						<a href="javascript:void(0)" onclick="tiaozhuan(2)"><text id="2"></text> <span></span><span></span><span></span><span></span></a>
+					</div>
+				</td>
+				<td>
+					<div class="Bbox">
+						<a href="javascript:void(0)" onclick="tiaozhuan(3)"><text id="3"></text><span></span><span></span><span></span><span></span>
+						</a>
+					</div>
+				</td>
+			</tr>
+			<tr height="20px"></tr>
+			<tr>
+				<td>
+					<div class="Bbox">
+						<a href="javascript:void(0)" onclick="tiaozhuan(4)"><text id="4"></text> <span></span><span></span><span></span><span></span>
+						</a>
+					</div>
+				</td>
+				<td>
+					<div class="Bbox">
+						<a href="javascript:void(0)" onclick="tiaozhuan(5)"><text id="5"></text> <span></span><span></span><span></span><span></span>
+						</a>
+					</div>
+				</td>
+				<td>
+					<div class="Bbox">
+						<a href="javascript:void(0)" onclick="tiaozhuan(6)"><text id="6"></text> <span></span><span></span><span></span><span></span></a>
+					</div>
+				</td>
+				<td>
+					<div class="Bbox">
+						<a href="javascript:void(0)" onclick="tiaozhuan(7)"><text id="7"></text> <span></span><span></span><span></span><span></span></a>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+	</body>
+</html>
