@@ -1,0 +1,255 @@
+@@ -0,0 +1,254 @@
+* {
+	/* 初始化 清除页面元素的内外边距 */
+	padding: 0;
+	margin: 0;
+	/* 盒子模型 */
+	box-sizing: border-box;
+}
+
+body {
+	/* 弹性布局 让页面元素垂直+水平居中 */
+	display: flex;
+	justify-content: center;
+	/* align-items: center; */
+	/* 让页面始终占浏览器可视区域总高度 */
+	height: 100vh;
+	/* 背景渐变色 */
+	/* background: linear-gradient(#000000, #000000); */
+}
+
+.bgm {
+	z-index: 888;
+	top: 2px;
+	right: 2px;
+
+	/* align="right"; align="top" style="height:16px; position: absolute;top: 0;right: 5px;" */
+}
+
+.bgm a {
+	overflow: hidden;
+	position: relative;
+	justify-content: center;
+
+	color: #03e9f4;
+	/* 取消a表现原有的下划线 */
+	text-decoration: none;
+	/* 同样加个过渡 */
+	width: 300px;
+
+
+}
+
+.form {
+	style="border: #000000;"
+	color: yellow;
+	margin: 0;
+	width: 500px;
+	height: 70px;
+	padding: 0px 0px 0px;
+	text-align: center;
+	line-height: 60px;
+	border: 1px solid #f8f009;
+}
+
+.input {
+	-web-kit-appearance: none;
+	-moz-appearance: none;
+	font-size: 1.4em;
+	height: 2.0em;
+	border-radius: 10px;
+	border: 1px solid yellow;
+	outline: 0;
+	cursor: pointer;
+	transition: all 0.5s;
+	overflow: hidden;
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.4);
+	opacity: 0.9;
+
+}
+
+.input:hover {
+	/* width:500px; */
+	background-color: #03E9F4;
+	opacity: 0.5;
+
+	/* text-transform: scale(0.8,0.9); */
+}
+
+
+
+
+.Bbox {
+	/* 弹性布局 让子元素称为弹性项目 */
+	display: flex;
+	/* 让弹性项目垂直排列 原理是改变弹性盒子的主轴方向 父元素就是弹性盒子 现在改变后的主轴方向是向下了 */
+	flex-direction: column;
+	/* 让弹性项目在交叉轴方向水平居中 现在主轴的方向是向下 交叉轴的方向是与主轴垂直 交叉轴的方向是向右 */
+	align-items: center;
+	text-align: center;
+	z-index: 999;
+	width: 190px;
+	height: 60px;
+
+}
+
+
+
+
+.Bbox a {
+	overflow: hidden;
+	position: relative;
+	justify-content: center;
+
+	color: #03e9f4;
+	/* 取消a表现原有的下划线 */
+	text-decoration: none;
+	/* 同样加个过渡 */
+	transition: all 0.5s;
+	height: 50px;
+	width: 90px;
+	line-height: 50px;
+	text-align: center;
+	box-shadow: 0 0 1px #ff557f, 0 0 25px #55aaff, 0 0 50px #aa00ff,
+		0 0 100px #55ff7f;
+	border-radius: 5px;
+	opacity: 0.6;
+
+
+}
+
+.Bbox a:hover {
+	color: #ff0000;
+	border-radius: 10px;
+	background-color: #aaffff;
+	filter: blur(0.5px);
+	box-shadow: 0 0 5px #ff007f, 0 0 25px #ff0000, 0 0 300px #03e9f4,
+		0 0 900px #ff0000;
+	opacity: 1;
+}
+
+.Bbox a span {
+	position: absolute;
+}
+
+.Bbox a span:first-child {
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 2px;
+	/* to right 就是往右边 下面的同理 */
+	background: linear-gradient(transparent, #ffff7f);
+	/* 动画 名称 时长 linear是匀速运动 infinite是无限次运动 */
+	animation: move1 5s linear infinite;
+}
+
+.Bbox a span:nth-child(2) {
+	right: 0;
+	top: -100%;
+	width: 2px;
+	height: 100%;
+	background: linear-gradient(transparent, #ffff7f);
+	/* 这里多了个0.25s其实是延迟时间 */
+	animation: move2 6s linear 0.25s infinite;
+}
+
+.Bbox a span:nth-child(3) {
+	right: -100%;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(transparent, #ffff7f);
+	animation: move3 4s linear 0.5s infinite;
+}
+
+.Bbox a span:last-child {
+	left: 0;
+	bottom: -100%;
+	width: 2px;
+	height: 100%;
+	background: linear-gradient(transparent, #ffff7f);
+	animation: move4 3s linear 0.75s infinite;
+}
+
+@keyframes move1 {
+	0% {
+		left: -100%;
+	}
+
+	50%,
+	100% {
+		left: 100%;
+	}
+}
+
+@keyframes move2 {
+	0% {
+		top: -100%;
+	}
+
+	50%,
+	100% {
+		top: 100%;
+	}
+}
+
+@keyframes move3 {
+	0% {
+		right: -100%;
+	}
+
+	50%,
+	100% {
+		right: 100%;
+	}
+}
+
+@keyframes move4 {
+	0% {
+		bottom: -100%;
+	}
+
+	50%,
+	100% {
+		bottom: 100%;
+	}
+}
+
+
+.grid {	
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	height: 95%;
+	width: 95%;
+}
+
+.cell {
+	width:70px;
+	height: 70px;
+	z-index: 999;
+	border-radius: 50%;
+	opacity: 0.1;
+	transition: background 0.1s linear, box-shadow 0.1s linear;
+	-webkit-transition: background 0.1s linear, -webkit-box-shadow 0.1s linear;
+}
+
+.cell:hover {
+	z-index: 99;
+	background: #ffff00;
+	box-shadow: 0 0 10px 2px #0055ff;
+	transform: scale(1.5);
+	-webkit-transform: scale(1.1);
+	opacity: 0.4;
+	transition: all 0s linear;
+	-webkit-transition: all 0s linear;
+}
